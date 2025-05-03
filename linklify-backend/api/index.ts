@@ -14,11 +14,4 @@ app.get("/", (req, res) => {
 app.use('/api', URLRoute);
 
 
-const port = 3005;
-
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
-});
-
-
 module.exports = app;
