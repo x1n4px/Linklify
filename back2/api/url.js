@@ -3,11 +3,13 @@ const router = express.Router();
 const { createClient } = require('@libsql/client');
 const { v4: uuidv4 } = require('uuid');
 
+/*
 // Configuración de Turso DB
 const db = createClient({
   url: process.env.TURSO_DB_URL,
   authToken: process.env.TURSO_AUTH_TOKEN,
 });
+*/
 
 // Health Check Endpoint
 router.get('/health', (req, res) => {
@@ -28,6 +30,13 @@ router.get('/test', (req, res) => {
 router.get('/:shortCode', async (req, res) => {
   try {
     const { shortCode } = req.params;
+    res.status(200).json({
+        status: 'OK',
+        message: 'API is working perfectly!',
+        timestamp: new Date().toISOString(),
+        dbStatus: process.env.TURSO_DB_URL ? 'Connected' : 'Not configured'
+      });
+    /*
     const result = await db.execute({
       sql: 'SELECT original_url FROM short_urls WHERE short_code = ?',
       args: [shortCode]
@@ -45,6 +54,7 @@ router.get('/:shortCode', async (req, res) => {
       status: 'OK',
       original_url: result.rows[0].original_url 
     });
+    */
   } catch (error) {
     console.error('Error finding original URL:', error);
     res.status(500).json({ 
@@ -56,6 +66,7 @@ router.get('/:shortCode', async (req, res) => {
   }
 });
 
+/*
 // Acortar URL
 router.post('/shorten', async (req, res) => {
   try {
@@ -95,5 +106,6 @@ router.post('/shorten', async (req, res) => {
     });
   }
 });
+*/
 
 module.exports = router;
