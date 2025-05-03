@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require('cors');
 const app = express();
-//const URLRoute = require('./routes/urlRoute')
+const URLRoute = require('./routes/urlRoute')
 
 
 app.use(cors());
@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
   res.send(htmlResponse);
 });
 
-//app.use('/api', URLRoute);
+app.use('/api', URLRoute);
 
 
 const port = 3005;
