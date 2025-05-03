@@ -56,7 +56,6 @@ router.get('/:shortCode', async (req, res) => {
         }
     });
 
-/*
 // Acortar URL
 router.post('/shorten', async (req, res) => {
   try {
@@ -96,6 +95,5 @@ router.post('/shorten', async (req, res) => {
     });
   }
 });
-*/
 
 module.exports = router;
