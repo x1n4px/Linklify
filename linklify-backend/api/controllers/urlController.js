@@ -87,6 +87,16 @@ const shortenUrl = async (req, res) => {
 };
 
 
+const healthCheck = async (req, res) => {
+    try {
+         
+        res.json({ message: 'Test endpoint is working!' });
+    } catch (error) {
+        console.error('Error in test:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
 
 
-export { findOriginalUrl, shortenUrl };
+
+export { findOriginalUrl, shortenUrl, healthCheck };
