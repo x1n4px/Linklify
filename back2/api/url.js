@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 const db = createClient({
     url: process.env.TURSO_DB_URL,
     authToken: process.env.TURSO_AUTH_TOKEN,
-  });
+});
 
 // Health Check Endpoint
 router.get('/health', (req, res) => {
@@ -25,17 +25,24 @@ router.get('/test', (req, res) => {
 
 // Obtener URL original
 router.get('/:shortCode', async (req, res) => {
+    try {
+        res.status(200).json({
+            status: 'OK',
+            message: 'API is working perfectly!',
+            timestamp: new Date().toISOString(),
+            dbStatus: process.env.TURSO_DB_URL ? 'Connected' : 'Not configured'
+        });
+    } catch (error) {
 
-
-    res.status(200).json({
-        status: 'OK',
-        message: 'API is working perfectly!',
-        timestamp: new Date().toISOString(),
-        dbStatus: process.env.TURSO_DB_URL ? 'Connected' : 'Not configured'
-    });
-
-
- });
+        console.error('Error fetching URL:', error);
+        res.status(500).json({
+            status: 'Error',
+            error: 'Failed to fetch URL',
+            details: error.message,
+            code: 'SERVER_ERROR'
+        });
+    }
+});
 
 /*
 // Acortar URL
