@@ -1,17 +1,27 @@
 const express = require("express");
 const cors = require('cors');
 const app = express();
-const URLRoute = require('./routes/urlRoute')
+//const URLRoute = require('./routes/urlRoute')
 
 
 app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Express on Vercel");
+  const htmlResponse = `
+    <html>
+      <head>
+        <title>NodeJs y Express en Vercel</title>
+      </head>
+      <body>
+        <h1>Soy un proyecto Back end en vercel</h1>
+      </body>
+    </html>
+  `;
+  res.send(htmlResponse);
 });
 
-app.use('/api', URLRoute);
+//app.use('/api', URLRoute);
 
 
 const port = 3005;
@@ -20,4 +30,4 @@ app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
 });
 
-module.exports = app;
+//module.exports = app;
