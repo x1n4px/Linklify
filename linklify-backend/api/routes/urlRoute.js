@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {findOriginalUrl, shortenUrl, healthCheck } = require('../controllers/urlController');
 
-
+/*
 router.get('/url/:shortCode',
     findOriginalUrl
 )
@@ -10,7 +10,7 @@ router.get('/url/:shortCode',
 router.post('/url',
     shortenUrl
 )
-
+*/
 router.get('/health',
     healthCheck
 )
