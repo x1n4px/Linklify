@@ -26,9 +26,10 @@ router.get('/test', (req, res) => {
 // Obtener URL original
 router.get('/:shortCode', async (req, res) => {
     try {
+        const { shortCode } = req.params;
         res.status(200).json({
             status: 'OK',
-            message: 'API is working perfectly!',
+            message: `API is working perfectly! ${shortCode}`,
             timestamp: new Date().toISOString(),
             dbStatus: process.env.TURSO_DB_URL ? 'Connected' : 'Not configured'
         });
