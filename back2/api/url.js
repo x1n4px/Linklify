@@ -32,25 +32,29 @@ router.get('/:shortCode', async (req, res) => {
             args: [shortCode]
         });
 
+        if (!result.rows.length) {
+            return res.status(404).json({
+                status: 'Error',
+                error: 'Short URL not found',
+                code: 'NOT_FOUND'
+            });
+        }
 
-        res.status(200).json({
-            status: 'OK',
-            message: `API is working perfectly! ${shortCode}`,
-            timestamp: new Date().toISOString(),
-            dbStatus: process.env.TURSO_DB_URL ? 'Connected' : 'Not configured',
-            original_url: result.rows.length > 0 ? result.rows[0].original_url : null,
-        });
-    } catch (error) {
 
-        console.error('Error fetching URL:', error);
-        res.status(500).json({
-            status: 'Error',
-            error: 'Failed to fetch URL',
-            details: error.message,
-            code: 'SERVER_ERROR'
-        });
-    }
-});
+            res.status(200).json({
+                original_url: result.rows.length > 0 ? result.rows[0].original_url : null,
+            });
+        } catch (error) {
+
+            console.error('Error fetching URL:', error);
+            res.status(500).json({
+                status: 'Error',
+                error: 'Failed to fetch URL',
+                details: error.message,
+                code: 'SERVER_ERROR'
+            });
+        }
+    });
 
 /*
 // Acortar URL
