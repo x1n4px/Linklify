@@ -1,70 +1,36 @@
 const express = require('express');
 const router = express.Router();
-const { createClient } = require('@libsql/client');
-const { v4: uuidv4 } = require('uuid');
 
-/*
-// Configuración de Turso DB
-const db = createClient({
-  url: process.env.TURSO_DB_URL,
-  authToken: process.env.TURSO_AUTH_TOKEN,
-});
-*/
+
 
 // Health Check Endpoint
 router.get('/health', (req, res) => {
-  res.status(200).json({
-    status: 'OK',
-    message: 'API is working perfectly!',
-    timestamp: new Date().toISOString(),
-    dbStatus: process.env.TURSO_DB_URL ? 'Connected' : 'Not configured'
-  });
-});
-
-// Test Endpoint
-router.get('/test', (req, res) => {
-  res.json({ message: 'Test endpoint works!' });
-});
-
-// Obtener URL original
-router.get('/:shortCode', async (req, res) => {
-  try {
-    const { shortCode } = req.params;
     res.status(200).json({
         status: 'OK',
         message: 'API is working perfectly!',
         timestamp: new Date().toISOString(),
         dbStatus: process.env.TURSO_DB_URL ? 'Connected' : 'Not configured'
-      });
-    /*
-    const result = await db.execute({
-      sql: 'SELECT original_url FROM short_urls WHERE short_code = ?',
-      args: [shortCode]
+    });
+});
+
+// Test Endpoint
+router.get('/test', (req, res) => {
+    res.json({ message: 'Test endpoint works!' });
+});
+
+// Obtener URL original
+router.get('/:shortCode', async (req, res) => {
+
+
+    res.status(200).json({
+        status: 'OK',
+        message: 'API is working perfectly!',
+        timestamp: new Date().toISOString(),
+        dbStatus: process.env.TURSO_DB_URL ? 'Connected' : 'Not configured'
     });
 
-    if (!result.rows.length) {
-      return res.status(404).json({ 
-        status: 'Error',
-        error: 'Short URL not found',
-        code: 'NOT_FOUND'
-      });
-    }
-    
-    res.json({ 
-      status: 'OK',
-      original_url: result.rows[0].original_url 
-    });
-    */
-  } catch (error) {
-    console.error('Error finding original URL:', error);
-    res.status(500).json({ 
-      status: 'Error',
-      error: 'Internal server error',
-      details: error.message,
-      code: 'SERVER_ERROR'
-    });
-  }
-});
+
+ });
 
 /*
 // Acortar URL
