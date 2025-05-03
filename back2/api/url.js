@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
+const { createClient } = require('@libsql/client');
+const { v4: uuidv4 } = require('uuid');
 
 
 // Health Check Endpoint
