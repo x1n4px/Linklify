@@ -57,7 +57,7 @@ router.get('/:shortCode', async (req, res) => {
     });
 
 // Acortar URL
-router.post('/shorten', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { original_url } = req.body;
 
