@@ -4,7 +4,7 @@ import {getURL} from '../service/shortApi';
 
 const RedirectHandler = () => {
   const { code } = useParams();
-
+  console.log('Código recibido:', code);
   useEffect(() => {
     const redirect = async () => {
       try {

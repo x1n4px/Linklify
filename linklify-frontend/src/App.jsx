@@ -6,6 +6,7 @@ import RedirectHandler from './components/RedirectHandler';
 import CopyButton from './components/CopyButton';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import NotFound from './components/NotFound';
 
 function App() {
   const [urls, setUrls] = useState([]);
@@ -13,7 +14,6 @@ function App() {
 
   const handleUrlShortened = (newUrl) => {
     setUrls([newUrl, ...urls]);
-    console.log('New URL:', newUrl);
     setShortUrl(newUrl);
   };
 
@@ -42,6 +42,7 @@ function App() {
           }
         />
         <Route path="/:code" element={<RedirectHandler />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
