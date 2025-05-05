@@ -9,7 +9,7 @@ const CopyButton = ({ urlToCopy }) => {
     const handleCopy = async () => {
         try {
             const url = 
-            await navigator.clipboard.writeText(API_URL+"/"+urlToCopy);
+            await navigator.clipboard.writeText(API_URL+"/url/"+urlToCopy);
             setIsCopied(true);
 
             // Resetear el estado después de 2 segundos

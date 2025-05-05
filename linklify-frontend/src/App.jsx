@@ -41,7 +41,7 @@ function App() {
             </div>
           }
         />
-        <Route path="/:code" element={<RedirectHandler />} />
+        <Route path="/url/:code" element={<RedirectHandler />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
